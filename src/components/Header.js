@@ -6,8 +6,7 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading2: false,
-      name: '',
+      getName: '',
     };
   }
 
@@ -17,22 +16,22 @@ class Header extends React.Component {
 
   userName = async () => {
     this.setState({
-      loading2: true,
+      loading: true,
     });
     const user = await getUser();
     this.setState({
-      loading2: false,
-      name: user.name,
+      loading: false,
+      getName: user.name,
     });
   }
 
   render() {
-    const { loading2, name } = this.state;
+    const { loading, getName } = this.state;
     return (
       <header
         data-testid="header-component"
       >
-        {loading2 ? <Load /> : <h3 data-testid="header-user-name">{`Olá, ${name}`}</h3>}
+        {loading ? <Load /> : <h3 data-testid="header-user-name">{`Olá, ${getName}`}</h3>}
       </header>
     );
   }

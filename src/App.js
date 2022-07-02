@@ -9,18 +9,47 @@ import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+    };
+  }
+
   render() {
+    const { loading } = this.state;
     return (
       <>
         <p>TrybeTunes</p>
         <Switch>
-          <Route path="/" component={ Login } exact />
-          <Route path="/search" component={ Search } />
-          <Route path="/album/:id" component={ Album } />
-          <Route path="/favorites" component={ Favorites } />
-          <Route path="/profile" component={ Profile } exact />
-          <Route path="/profile/edit" component={ ProfileEdit } />
-          <Route path="*" component={ NotFound } />
+          <Route
+            path="/"
+            render={
+              (props) => <Login { ...props } loading={ loading } />
+            }
+            exact
+          />
+          <Route
+            path="/search"
+            render={
+              (props) => <Search { ...props } loading={ loading } />
+            }
+          />
+          <Route path="/album/:id" render={ (props) => <Album { ...props } /> } />
+          <Route path="/favorites" render={ (props) => <Favorites { ...props } /> } />
+          <Route path="/profile" render={ (props) => <Profile { ...props } /> } exact />
+          <Route
+            path="/profile/edit"
+            render={
+              (props) => <ProfileEdit { ...props } />
+            }
+          />
+          <Route
+            path="*"
+            render={
+              (props) => <NotFound { ...props } />
+            }
+          />
         </Switch>
       </>
     );
