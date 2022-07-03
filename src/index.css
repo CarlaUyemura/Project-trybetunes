@@ -17,3 +17,22 @@ code {
   display: flex;
   justify-content: center;
 }
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(204, 204, 204);
+  color: rgb(0, 0, 0) ;
+}
+
+.menu-items{
+  padding: 20px;
+  text-decoration: none;
+  color: rgb(0, 0, 0) ;
+}
+
+.menu-items:hover {
+  background-color: rgb(219, 218, 218);
+}
+

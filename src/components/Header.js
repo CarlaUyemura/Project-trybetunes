@@ -35,15 +35,17 @@ class Header extends React.Component {
         <span>
           {
             loading
-              ? <Load /> : <h3 data-testid="header-user-name">{`Olá, ${getName}`}</h3>
+              ? <Load /> : <h4 data-testid="header-user-name">{`Olá, ${getName}`}</h4>
           }
         </span>
+        <h2>TrybeTunes</h2>
         <section>
           <nav>
             <NavLink
               to="/search"
               activeClassName="selected"
               data-testid="link-to-search"
+              className="menu-items"
             >
               Pesquisa
 
@@ -52,6 +54,7 @@ class Header extends React.Component {
               to="/favorites"
               activeClassName="selected"
               data-testid="link-to-favorites"
+              className="menu-items"
             >
               Favoritas
 
@@ -60,6 +63,7 @@ class Header extends React.Component {
               to="/profile"
               activeClassName="selected"
               data-testid="link-to-profile"
+              className="menu-items"
               exact
             >
               Profile

@@ -19,39 +19,36 @@ class App extends React.Component {
   render() {
     const { loading } = this.state;
     return (
-      <>
-        <p>TrybeTunes</p>
-        <Switch>
-          <Route
-            path="/"
-            render={
-              (props) => <Login { ...props } loading={ loading } />
-            }
-            exact
-          />
-          <Route
-            path="/search"
-            render={
-              (props) => <Search { ...props } loading={ loading } />
-            }
-          />
-          <Route path="/album/:id" render={ (props) => <Album { ...props } /> } />
-          <Route path="/favorites" render={ (props) => <Favorites { ...props } /> } />
-          <Route path="/profile" render={ (props) => <Profile { ...props } /> } exact />
-          <Route
-            path="/profile/edit"
-            render={
-              (props) => <ProfileEdit { ...props } />
-            }
-          />
-          <Route
-            path="*"
-            render={
-              (props) => <NotFound { ...props } />
-            }
-          />
-        </Switch>
-      </>
+      <Switch>
+        <Route
+          path="/"
+          render={
+            (props) => <Login { ...props } loading={ loading } />
+          }
+          exact
+        />
+        <Route
+          path="/search"
+          render={
+            (props) => <Search { ...props } loading={ loading } />
+          }
+        />
+        <Route path="/album/:id" render={ (props) => <Album { ...props } /> } />
+        <Route path="/favorites" render={ (props) => <Favorites { ...props } /> } />
+        <Route path="/profile" render={ (props) => <Profile { ...props } /> } exact />
+        <Route
+          path="/profile/edit"
+          render={
+            (props) => <ProfileEdit { ...props } />
+          }
+        />
+        <Route
+          path="*"
+          render={
+            (props) => <NotFound { ...props } />
+          }
+        />
+      </Switch>
     );
   }
 }
