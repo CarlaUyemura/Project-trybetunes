@@ -89,18 +89,19 @@ class Search extends React.Component {
           {`Resultado de álbuns de: ${artist}`}
 
           { listAlbuns.length === 0 ? <div>Nenhum álbum foi encontrado</div>
-            : listAlbuns.map((album, index) => (
-              <div key={ index }>
-                <NavLink
-                  to={ `/album/${album.collectionId}` }
-                  data-testid={ `link-to-album-${album.collectionId}` }
-                >
+            : listAlbuns.map((album) => (
+              <NavLink
+                key={ album.collectionId }
+                to={ `/album/${album.collectionId}` }
+                data-testid={ `link-to-album-${album.collectionId}` }
+              >
+                <div>
                   <img src={ album.artworkUrl100 } alt="Imagem do Album" />
                   <h5>{album.collectionName}</h5>
                   <h6>{album.artistName}</h6>
 
-                </NavLink>
-              </div>
+                </div>
+              </NavLink>
 
             ))}
         </section>
