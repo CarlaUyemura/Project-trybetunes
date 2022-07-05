@@ -3,6 +3,8 @@ import React from 'react';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
+import Load from './Load';
+import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
   constructor(props) {
@@ -10,8 +12,13 @@ class Album extends React.Component {
     this.state = {
       album: {},
       getAlbum: [],
+      musics: [],
     };
+  }
+
+  componentDidMount() {
     this.listMusics();
+    this.getLocalMusics();
   }
 
  listMusics = async () => {
@@ -23,28 +30,61 @@ class Album extends React.Component {
    });
  }
 
- render() {
-   const { album, getAlbum } = this.state;
-   return (
-     <div
-       data-testid="page-album"
-     >
-       <Header />
-       <h2>Lista de Músicas</h2>
+getLocalMusics = async () => {
+  const musicLocal = await getFavoriteSongs();
+  this.setState({
+    musics: [...musicLocal],
+  });
+}
 
-       <section>
-         <div>
-           <img src={ album.artworkUrl100 } alt="Imagem do Album" />
-           <h2 data-testid="album-name">{album.collectionName}</h2>
-           <h3 data-testid="artist-name">{album.artistName}</h3>
-         </div>
-         <MusicCard getAlbum={ getAlbum } />
+checkFavorite = async (data) => {
+  this.setState({
+    loading: true,
+  });
+  await addSong(data);
+  const local = await getFavoriteSongs();
+  this.setState({
+    musics: [...local],
+    loading: false,
+  });
+}
 
-       </section>
-
-     </div>
-   );
- }
+render() {
+  const { album, getAlbum, loading, musics } = this.state;
+  return (
+    <div
+      data-testid="page-album"
+    >
+      <Header />
+      <h2>Lista de Músicas</h2>
+      { loading ? <Load />
+        : (
+          <section>
+            <div>
+              <img src={ album.artworkUrl100 } alt="Imagem do Album" />
+              <h2 data-testid="album-name">{album.collectionName}</h2>
+              <h3 data-testid="artist-name">{album.artistName}</h3>
+            </div>
+            {
+              getAlbum.filter((item) => (item.kind === 'song')).map((elem) => (
+                <MusicCard
+                  getAlbum={ getAlbum }
+                  loading={ loading }
+                  key={ elem.trackId }
+                  trackName={ elem.trackName }
+                  trackId={ elem.trackId }
+                  previewUrl={ elem.previewUrl }
+                  checkFavorite={ this.checkFavorite }
+                  musics={ musics }
+                  data={ elem }
+                />
+              ))
+            }
+          </section>
+        )}
+    </div>
+  );
+}
 }
 
 Album.propTypes = {

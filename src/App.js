@@ -33,7 +33,13 @@ class App extends React.Component {
             (props) => <Search { ...props } loading={ loading } />
           }
         />
-        <Route path="/album/:id" render={ (props) => <Album { ...props } /> } />
+        <Route
+          path="/album/:id"
+          render={ (props) => (<Album
+            { ...props }
+            loading={ loading }
+          />) }
+        />
         <Route path="/favorites" render={ (props) => <Favorites { ...props } /> } />
         <Route path="/profile" render={ (props) => <Profile { ...props } /> } exact />
         <Route
