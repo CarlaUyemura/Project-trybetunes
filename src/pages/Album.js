@@ -42,8 +42,8 @@ checkFavorite = async (data) => {
   this.setState({
     loading: true,
   });
-  const teste = musics.some((item) => item.trackId === data.trackId);
-  if (!teste) {
+  const verificaMusic = musics.some((item) => item.trackId === data.trackId);
+  if (!verificaMusic) {
     await addSong(data);
     this.setState({
       musics: [...await getFavoriteSongs()],
