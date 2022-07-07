@@ -35,7 +35,7 @@ class Header extends React.Component {
         <span>
           {
             loading
-              ? <Load /> : <h4 data-testid="header-user-name">{`Olá, ${getName}`}</h4>
+              ? <Load /> : <h4 data-testid="header-user-name">{getName}</h4>
           }
         </span>
         <h2>TrybeTunes</h2>
