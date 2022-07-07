@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 import Load from './Load';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
   constructor(props) {
@@ -38,15 +38,24 @@ getLocalMusics = async () => {
 }
 
 checkFavorite = async (data) => {
+  const { musics } = this.state;
   this.setState({
     loading: true,
   });
-  await addSong(data);
-  const local = await getFavoriteSongs();
-  this.setState({
-    musics: [...local],
-    loading: false,
-  });
+  const teste = musics.some((item) => item.trackId === data.trackId);
+  if (!teste) {
+    await addSong(data);
+    this.setState({
+      musics: [...await getFavoriteSongs()],
+      loading: false,
+    });
+  } else {
+    await removeSong(data);
+    this.setState({
+      musics: [...await getFavoriteSongs()],
+      loading: false,
+    });
+  }
 }
 
 render() {
