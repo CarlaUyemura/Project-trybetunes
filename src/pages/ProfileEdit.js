@@ -41,7 +41,16 @@ class ProfileEdit extends React.Component {
       name: user.name,
       email: user.email,
       image: user.image,
-    });
+    }, this.verificaInputInt);
+  }
+
+  verificaInputInt = () => {
+    const { name, description, email, image } = this.state;
+    if (name && description && email && image) {
+      this.setState({
+        disabledButton: false,
+      });
+    }
   }
 
   verificaInput = ({ target }) => {
@@ -49,7 +58,7 @@ class ProfileEdit extends React.Component {
     this.setState({
       [target.id]: target.value,
     });
-    if (name && description && email && image) {
+    if (name.length && description.length && email.length && image.length) {
       this.setState({
         disabledButton: false,
       });
@@ -69,7 +78,11 @@ class ProfileEdit extends React.Component {
     });
     await updateUser(dados);
     this.setState({
-      redirect: true,
+      loading: false,
+    }, () => {
+      this.setState({
+        redirect: true,
+      });
     });
   }
 
