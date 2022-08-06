@@ -14,10 +14,20 @@ class MusicCard extends Component {
     const favorite = musics.some((item) => item.trackId === trackId);
     return (
       <div>
-        <div>
+        <div className="container-music-un">
           <h4>{trackName}</h4>
-          <label htmlFor={ trackId } data-testid={ `checkbox-music-${trackId}` }>
-            Favorita
+          <audio data-testid="audio-component" src={ previewUrl } controls>
+            <track kind="captions" />
+            O seu navegador não suporta o elemento
+            <code>audio</code>
+          </audio>
+
+          <label
+            htmlFor={ trackId }
+            data-testid={ `checkbox-music-${trackId}` }
+            className="container-favorite"
+          >
+
             <input
               type="checkbox"
               id={ trackId }
@@ -25,12 +35,10 @@ class MusicCard extends Component {
               checked={ favorite }
               onChange={ () => checkFavorite(data) }
             />
+            {' '}
+            Favorita
+
           </label>
-          <audio data-testid="audio-component" src={ previewUrl } controls>
-            <track kind="captions" />
-            O seu navegador não suporta o elemento
-            <code>audio</code>
-          </audio>
         </div>
 
       </div>

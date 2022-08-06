@@ -34,26 +34,35 @@ class Profile extends React.Component {
       >
         <Header />
         {loading ? <Load /> : (
-          <div>
-            <img
-              src={ !user.image ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlPVKZNZ0WWVF_15Icrv5cD4-UUk6cvfgBXHRMf79jimY1DNo0oJ_0DD1_tNF4zUGOB7Q&usqp=CAU' : user.image }
-              alt={ `Imagem de ${user.name}` }
-              data-testid="profile-image"
-            />
-            <h2>Nome</h2>
-            <p>{user.name}</p>
-            <h2>Email</h2>
-            <p>{!user.email ? 'usuario@usuario.com' : user.email }</p>
-            <h2>Descrição</h2>
-            <p>{!user.description ? 'Insira uma descrição aqui!!' : user.description}</p>
-            <NavLink to="/profile/edit">
-              <button
-                type="button"
-              >
-                Editar perfil
+          <div className="container-profile">
+            <div className="profile">
+              <img
+                src={ !user.image ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlPVKZNZ0WWVF_15Icrv5cD4-UUk6cvfgBXHRMf79jimY1DNo0oJ_0DD1_tNF4zUGOB7Q&usqp=CAU' : user.image }
+                alt={ `Imagem de ${user.name}` }
+                data-testid="profile-image"
+                className="img-profile"
+              />
+              <div>
+                <h2 className="title-profile">Nome</h2>
+                <p className="data-profile">{user.name}</p>
+                <h2 className="title-profile">Email</h2>
+                <p className="data-profile">
+                  {!user.email ? 'usuario@usuario.com' : user.email }
+                </p>
+                <h2 className="title-profile">Descrição</h2>
+                <p className="data-profile">
+                  {!user.description ? 'Insira uma descrição aqui!!' : user.description}
+                </p>
+              </div>
+              <NavLink to="/profile/edit">
+                <button
+                  type="button"
+                >
+                  Editar perfil
 
-              </button>
-            </NavLink>
+                </button>
+              </NavLink>
+            </div>
           </div>
         )}
       </div>

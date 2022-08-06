@@ -62,48 +62,70 @@ class Search extends React.Component {
         {loading
           ? <Load />
           : (
-            <form>
-              <label htmlFor="input-search">
-                <input
-                  data-testid="search-artist-input"
-                  type="text"
-                  id="input-search"
-                  placeholder="Nome do Artista"
-                  value={ inputValue }
-                  onChange={ this.verificaInput }
-                />
-              </label>
+            <div className="container-search">
+              <form>
+                <label htmlFor="input-search">
+                  <input
+                    data-testid="search-artist-input"
+                    type="text"
+                    id="input-search"
+                    placeholder="Nome do Artista"
+                    value={ inputValue }
+                    onChange={ this.verificaInput }
+                  />
+                </label>
 
-              <button
-                type="button"
-                data-testid="search-artist-button"
-                disabled={ buttonDisabled }
-                onClick={ this.searchArtist }
-              >
-                Pesquisar
+                <button
+                  type="button"
+                  data-testid="search-artist-button"
+                  disabled={ buttonDisabled }
+                  onClick={ this.searchArtist }
+                >
+                  Pesquisar
 
-              </button>
-            </form>
+                </button>
+              </form>
+            </div>
           )}
-        <section hidden={ sectionHidden }>
-          {`Resultado de álbuns de: ${artist}`}
+        <section
+          hidden={ sectionHidden }
+          style={ { fontSize: '30px', marginBottom: '50px', textAlign: 'center' } }
+        >
+          <b>
+            {' '}
+            {`Resultado de álbuns de: ${artist}`}
+          </b>
 
-          { listAlbuns.length === 0 ? <div>Nenhum álbum foi encontrado</div>
-            : listAlbuns.map((album) => (
-              <NavLink
-                key={ album.collectionId }
-                to={ `/album/${album.collectionId}` }
-                data-testid={ `link-to-album-${album.collectionId}` }
-              >
-                <div>
+          <div className="container-albuns">
+            { listAlbuns.length === 0 ? (
+              <div className="container-nenhum">Nenhum álbum foi encontrado</div>
+            )
+              : listAlbuns.map((album) => (
+
+                <div
+                  className="container-card"
+                  key={ album.collectionId }
+                >
                   <img src={ album.artworkUrl100 } alt="Imagem do Album" />
-                  <h5>{album.collectionName}</h5>
-                  <h6>{album.artistName}</h6>
-
+                  <p className="name">
+                    <b>Album: </b>
+                    {' '}
+                    {album.collectionName}
+                  </p>
+                  <p className="name">
+                    <b>Artista: </b>
+                    {album.artistName}
+                  </p>
+                  <NavLink
+                    to={ `/album/${album.collectionId}` }
+                    data-testid={ `link-to-album-${album.collectionId}` }
+                  >
+                    <button type="button">Ver Músicas</button>
+                  </NavLink>
                 </div>
-              </NavLink>
 
-            ))}
+              ))}
+          </div>
         </section>
       </div>
     );

@@ -46,27 +46,30 @@ class Login extends React.Component {
       return <Load />;
     }
     return (
-
-      <div
-        data-testid="page-login"
-      >
-        <label htmlFor="login">
-          Nome:
-          <input
-            type="text"
-            data-testid="login-name-input"
-            onChange={ this.verificaInput }
-          />
-        </label>
-        <button
-          type="button"
-          data-testid="login-submit-button"
-          disabled={ buttonDisabled }
-          onClick={ this.click }
+      <main>
+        <div
+          className="container-login"
+          data-testid="page-login"
         >
-          Entrar
-        </button>
-      </div>
+          <h1>TrybeTunes</h1>
+          <label htmlFor="login">
+            <input
+              placeholder="Digite seu nome"
+              type="text"
+              data-testid="login-name-input"
+              onChange={ this.verificaInput }
+            />
+          </label>
+          <button
+            type="button"
+            data-testid="login-submit-button"
+            disabled={ buttonDisabled }
+            onClick={ this.click }
+          >
+            Entrar
+          </button>
+        </div>
+      </main>
     );
   }
 }

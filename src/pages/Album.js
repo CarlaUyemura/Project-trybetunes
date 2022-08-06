@@ -65,32 +65,53 @@ render() {
       data-testid="page-album"
     >
       <Header />
-      <h2>Lista de Músicas</h2>
-      { loading ? <Load />
-        : (
-          <section>
-            <div>
-              <img src={ album.artworkUrl100 } alt="Imagem do Album" />
-              <h2 data-testid="album-name">{album.collectionName}</h2>
-              <h3 data-testid="artist-name">{album.artistName}</h3>
-            </div>
-            {
-              getAlbum.filter((item) => (item.kind === 'song')).map((elem) => (
-                <MusicCard
-                  getAlbum={ getAlbum }
-                  loading={ loading }
-                  key={ elem.trackId }
-                  trackName={ elem.trackName }
-                  trackId={ elem.trackId }
-                  previewUrl={ elem.previewUrl }
-                  checkFavorite={ this.checkFavorite }
-                  musics={ musics }
-                  data={ elem }
+      <div className="container-list">
+        <h2 className="title-list">Lista de Músicas</h2>
+        { loading ? <Load />
+          : (
+            <section className="container-album">
+              <div className="container-capa">
+                <img
+                  src={ album.artworkUrl100 }
+                  alt="Imagem do Album"
+                  className="album-img"
                 />
-              ))
-            }
-          </section>
-        )}
+                <h2
+                  data-testid="album-name"
+                  className="title-album"
+                >
+                  {`Album: ${album.collectionName}`}
+
+                </h2>
+                <h3
+                  data-testid="artist-name"
+                  className="title-album"
+                >
+                  {`Artista:
+                  ${album.artistName}`}
+
+                </h3>
+              </div>
+              <div className="container-musics">
+                {
+                  getAlbum.filter((item) => (item.kind === 'song')).map((elem) => (
+                    <MusicCard
+                      getAlbum={ getAlbum }
+                      loading={ loading }
+                      key={ elem.trackId }
+                      trackName={ elem.trackName }
+                      trackId={ elem.trackId }
+                      previewUrl={ elem.previewUrl }
+                      checkFavorite={ this.checkFavorite }
+                      musics={ musics }
+                      data={ elem }
+                    />
+                  ))
+                }
+              </div>
+            </section>
+          )}
+      </div>
     </div>
   );
 }
