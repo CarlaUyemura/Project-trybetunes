@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 class NotFound extends React.Component {
@@ -6,10 +7,10 @@ class NotFound extends React.Component {
     return (
       <div
         data-testid="page-not-found"
-        className='container-notFound'
+        className="container-notFound"
       >
         <button
-          className='button-home'
+          className="button-home"
           type="button"
           onClick={ () => {
             history.push('/');
@@ -22,5 +23,11 @@ class NotFound extends React.Component {
     );
   }
 }
+
+NotFound.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 
 export default NotFound;
