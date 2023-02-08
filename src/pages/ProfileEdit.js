@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-max-depth */
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
